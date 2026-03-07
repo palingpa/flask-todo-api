@@ -29,6 +29,22 @@ def create_todo():
     return jsonify(item), 201
 
 
+@app.patch("/todos/<int:todo_id>")
+def update_todo(todo_id):
+    data = request.get_json(silent=True) or {}
+    for item in todos:
+        if item["id"] == todo_id:
+            if "title" in data:
+                title = (data.get("title") or "").strip()
+                if not title:
+                    return jsonify({"error": "title required"}), 400
+                item["title"] = title
+            if "done" in data:
+                item["done"] = bool(data["done"])
+            return jsonify(item)
+    return jsonify({"error": "not found"}), 404
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
 
