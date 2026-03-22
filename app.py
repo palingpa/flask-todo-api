@@ -45,6 +45,15 @@ def update_todo(todo_id):
     return jsonify({"error": "not found"}), 404
 
 
+@app.delete("/todos/<int:todo_id>")
+def delete_todo(todo_id):
+    for i, item in enumerate(todos):
+        if item["id"] == todo_id:
+            todos.pop(i)
+            return "", 204
+    return jsonify({"error": "not found"}), 404
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
 
