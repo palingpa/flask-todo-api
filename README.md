@@ -28,3 +28,7 @@ curl -X POST localhost:5000/todos -H 'Content-Type: application/json' -d '{"titl
 curl localhost:5000/todos
 ```
 
+
+## License
+
+MIT
