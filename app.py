@@ -22,7 +22,7 @@ def create_todo():
     data = request.get_json(silent=True) or {}
     title = (data.get("title") or "").strip()
     if not title:
-        return jsonify({"error": "title required"}), 400
+        return jsonify({"error": "title is required"}), 400
     item = {"id": _next_id, "title": title, "done": False}
     _next_id += 1
     todos.append(item)
